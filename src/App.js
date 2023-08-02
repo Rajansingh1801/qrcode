@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import QRCode from "qrcode.react";
+export default function App() {
+  const [inptvalue, setinptvalue] = useState("");
+  const [shown, setshown] = useState(false);
+  const inputchange = (e) => {
+    setinptvalue(e.target.value);
+  };
+  const clickme = () => {
+    setshown(!shown);
+  };
 
-function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section>
+      {!shown ? (
+        <div className="text-center">
+          <input
+            type="text"
+            onChange={inputchange}
+            name=""
+            id=""
+            value={inptvalue}
+          />{" "}
+          <br />
+          <button onClick={clickme}>Gernate</button>
+        </div>
+      ) : (
+        ""
+      )}
+
+      <div>
+        {shown ? (
+          <QRCode
+            value={inptvalue}
+            size={400}
+            level="M"
+            backgroundColor="#ffffff"
+            borderColor="#000000"
+          />
+        ) : (
+          ""
+        )}
+      </div>
+    </section>
   );
 }
-
-export default App;
